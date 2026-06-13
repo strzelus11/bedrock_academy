@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Mail, Phone, Building2 } from 'lucide-react'
+import { Mail, Phone, Building2, UserRound } from 'lucide-react'
 import { company } from '@/data/company'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { Container } from '@/components/ui/Container'
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="pt-24 pb-20 bg-background">
+    <div className="bg-background pt-24 pb-20">
       <Container>
         <div className="mb-12">
-          <span className="mb-3 inline-block font-heading text-sm font-semibold uppercase tracking-wider text-primary">
+          <span className="font-heading text-primary mb-3 inline-block text-sm font-semibold tracking-wider uppercase">
             Kontakt
           </span>
-          <h1 className="font-heading text-4xl font-bold text-text-primary sm:text-5xl mb-4">
+          <h1 className="font-heading text-text-primary mb-4 text-4xl font-bold sm:text-5xl">
             Napisz do nas
           </h1>
           <p className="text-text-secondary max-w-xl leading-relaxed">
@@ -35,47 +35,72 @@ export default function ContactPage() {
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
           {/* Contact info — 2 cols */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:col-span-2">
             {/* Company info card */}
-            <div className="rounded-card bg-white border border-border p-6 shadow-soft">
-              <h2 className="font-heading text-lg font-semibold text-text-primary mb-5">
+            <div className="rounded-card border-border shadow-soft border bg-white p-6">
+              <h2 className="font-heading text-text-primary mb-5 text-lg font-semibold">
                 Dane kontaktowe
               </h2>
               <ul className="flex flex-col gap-5">
                 <li className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <Mail size={18} className="text-primary" aria-hidden="true" />
+                  <div className="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <UserRound
+                      size={18}
+                      className="text-primary"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-text-secondary mb-0.5">
+                    <p className="text-text-secondary mb-0.5 text-xs font-medium">
+                      Dyrektor
+                    </p>
+                    <p className="text-text-primary text-sm font-medium">
+                      {company.president}
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <Mail
+                      size={18}
+                      className="text-primary"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-text-secondary mb-0.5 text-xs font-medium">
                       E-mail
                     </p>
                     <a
                       href={`mailto:${company.email}`}
-                      className="text-sm font-medium text-text-primary hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                      className="text-text-primary hover:text-primary focus-visible:ring-primary rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
                     >
                       {company.email}
                     </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <Phone size={18} className="text-primary" aria-hidden="true" />
+                  <div className="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <Phone
+                      size={18}
+                      className="text-primary"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-text-secondary mb-0.5">
+                    <p className="text-text-secondary mb-0.5 text-xs font-medium">
                       Telefon
                     </p>
                     <a
                       href={`tel:${company.phone.replace(/\s/g, '')}`}
-                      className="text-sm font-medium text-text-primary hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                      className="text-text-primary hover:text-primary focus-visible:ring-primary rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
                     >
                       {company.phone}
                     </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                  <div className="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
                     <Building2
                       size={18}
                       className="text-primary"
@@ -83,13 +108,13 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-text-secondary mb-0.5">
+                    <p className="text-text-secondary mb-0.5 text-xs font-medium">
                       Firma
                     </p>
-                    <p className="text-sm font-medium text-text-primary">
+                    <p className="text-text-primary text-sm font-medium">
                       {company.fullName}
                     </p>
-                    <p className="text-xs text-text-secondary mt-0.5">
+                    <p className="text-text-secondary mt-0.5 text-xs">
                       NIP: {company.nip}
                     </p>
                   </div>
@@ -99,15 +124,15 @@ export default function ContactPage() {
 
             {/* Info box */}
             <div
-              className="rounded-card p-5 border"
+              className="rounded-card border p-5"
               style={{
                 background: 'rgba(184,216,168,0.18)',
                 borderColor: 'rgba(62,124,58,0.18)',
               }}
             >
-              <p className="text-sm text-primary-dark leading-relaxed font-medium">
-                Odpowiadamy na wiadomości od poniedziałku do piątku,
-                w godzinach 9:00–17:00.
+              <p className="text-primary-dark text-sm leading-relaxed font-medium">
+                Odpowiadamy na wiadomości od poniedziałku do piątku, w godzinach
+                9:00–17:00.
               </p>
             </div>
           </div>

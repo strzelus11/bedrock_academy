@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Menu, Leaf } from 'lucide-react'
@@ -10,51 +10,68 @@ import { cn } from '@/lib/utils'
 
 const DARK_HERO_PAGES = new Set(['/', '/o-nas'])
 
+// On the server this module runs in Node — window doesn't exist, so we fall back
+// to useEffect (which is a no-op on the server). On the client this evaluates to
+// useLayoutEffect, which fires synchronously BEFORE the browser paints, so the
+// correct scroll state is already committed when the first pixel is drawn.
+// This eliminates the flash where useEffect fires after paint and causes a jump.
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
+const SCROLL_THRESHOLD = 20 // px — also guards against iOS rubber-band negative scrollY
+
 export function SiteHeader() {
-  // Start as "scrolled" (frosted glass) so SSR and first client render always match.
-  // useEffect corrects immediately based on real scroll position.
+  // True = frosted glass (safe initial state for both SSR and first client render).
+  // useIsomorphicLayoutEffect immediately corrects to the real scroll position
+  // before the browser paints, so the user never sees a wrong state flash.
   const [scrolled, setScrolled] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
   const overDarkHero = DARK_HERO_PAGES.has(pathname) && !scrolled
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     function handleScroll() {
-      // Math.max(0, …) prevents iOS rubber-band negative scrollY from triggering a switch
-      setScrolled(Math.max(0, window.scrollY) > 20)
+      setScrolled(Math.max(0, window.scrollY) > SCROLL_THRESHOLD)
     }
-    handleScroll()
+    handleScroll() // set correct state synchronously before first paint
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-1000 h-18 overflow-hidden">
+      {/*
+        No overflow-hidden here — it would clip the box-shadow on the frosted glass layer
+        (absolutely positioned children's shadows are clipped by overflow:hidden on the parent).
+        The background layers are absolute inset-0 so they stay within bounds without clipping.
+      */}
+      <header className="fixed top-0 left-0 right-0 z-1000 h-18">
 
         {/*
-          WHY TWO LAYERS: CSS cannot transition between background-image (gradient) and
-          background-color (white) — they are different properties. When toggling a single
-          element's classes, the background jumps instantly causing a transparent-flash frame
-          while text colors are mid-transition. Solution: always keep both layers in the DOM
-          and cross-fade them via opacity only, which CSS animates perfectly.
+          WHY TWO LAYERS instead of toggling classes on a single element:
+          CSS cannot cross-fade between background-image (gradient) and background-color (white).
+          They are different CSS properties, so transition-all fails silently and the background
+          jumps instantly to the new state — causing a fully-transparent frame while text
+          colors are still mid-transition (the "disappearing" bug).
+
+          Keeping both layers always in the DOM and animating ONLY their opacity gives CSS a
+          single property to interpolate, which it always handles correctly.
         */}
 
-        {/* Layer 1: frosted glass — fades IN when scrolled or on non-hero pages */}
+        {/* Layer 1: frosted glass — fully visible when NOT over dark hero */}
         <div
           className="pointer-events-none absolute inset-0 bg-white/92 backdrop-blur-md border-b border-border shadow-soft transition-opacity duration-300"
           style={{ opacity: overDarkHero ? 0 : 1 }}
           aria-hidden="true"
         />
 
-        {/* Layer 2: hero gradient — fades IN when over dark hero at scroll-top */}
+        {/* Layer 2: hero gradient — fully visible when over dark hero at scroll-top */}
         <div
           className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/30 to-transparent transition-opacity duration-300"
           style={{ opacity: overDarkHero ? 1 : 0 }}
           aria-hidden="true"
         />
 
-        {/* Content sits above both background layers */}
         <div className="relative mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
