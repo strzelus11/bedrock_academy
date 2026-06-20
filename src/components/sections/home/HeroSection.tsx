@@ -40,16 +40,35 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
-      {/*
-        Pillar gradient: dark at the top (badge + H1 readable) → transparent in the
-        middle (characters + coding screen fully visible) → dark at the bottom (CTAs
-        readable). The image scene fills the full hero height; text frames it.
-      */}
+      {/* Base tint — takes the edge off the bright Minecraft golden-hour scene uniformly */}
+      <div className="absolute inset-0 bg-primary-dark/20" aria-hidden="true" />
+
+      {/* Pillar gradient: dark top (text) → transparent mid (characters) → dark bottom (CTAs) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(10,24,17,0.93) 0%, rgba(10,24,17,0.68) 14%, rgba(10,24,17,0.22) 34%, rgba(10,24,17,0.06) 52%, rgba(10,24,17,0.06) 60%, rgba(10,24,17,0.20) 70%, rgba(10,24,17,0.62) 84%, rgba(10,24,17,0.90) 100%)',
+            'linear-gradient(to bottom, rgba(10,24,17,0.95) 0%, rgba(10,24,17,0.90) 10%, rgba(10,24,17,0.78) 22%, rgba(10,24,17,0.55) 38%, rgba(10,24,17,0.22) 52%, rgba(10,24,17,0.10) 60%, rgba(10,24,17,0.10) 66%, rgba(10,24,17,0.22) 74%, rgba(10,24,17,0.65) 86%, rgba(10,24,17,0.92) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Left vignette: protects left-aligned text without blocking the scene on the right */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(to right, rgba(10,24,17,0.62) 0%, rgba(10,24,17,0.32) 28%, rgba(10,24,17,0.08) 50%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Right-edge vignette: cinematic depth, tones down the bright sky at the right border */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(to left, rgba(10,24,17,0.30) 0%, rgba(10,24,17,0.08) 35%, transparent 55%)',
         }}
         aria-hidden="true"
       />
@@ -75,7 +94,7 @@ export function HeroSection() {
           animate="visible"
         >
           <motion.div variants={fadeUp} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold text-white/90 backdrop-blur-sm border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] mb-5">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/30 px-4 py-1.5 text-sm font-semibold text-primary-light backdrop-blur-sm border border-primary-light/40 shadow-[inset_0_1px_0_rgba(184,216,168,0.15)] mb-5">
               <span className="h-2 w-2 rounded-full bg-primary-light animate-pulse" aria-hidden="true" />
               Poznań i okolice
             </span>
@@ -85,6 +104,7 @@ export function HeroSection() {
             variants={fadeUp}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-heading text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl text-balance mb-6"
+            style={{ textShadow: '0 2px 28px rgba(0,0,0,0.55), 0 1px 6px rgba(0,0,0,0.35)' }}
           >
             Programowanie dla dzieci{' '}
             <span className="text-primary-light">poprzez zabawę</span>
@@ -94,6 +114,7 @@ export function HeroSection() {
             variants={fadeUp}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="hidden sm:block text-lg text-white/80 leading-relaxed max-w-lg"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.45)' }}
           >
             {company.shortDescription}
           </motion.p>
@@ -110,7 +131,7 @@ export function HeroSection() {
         >
           <Link
             href="/o-nas"
-            className="inline-flex items-center justify-center gap-2 rounded-button bg-white px-6 py-3.5 text-base font-semibold text-primary-dark shadow-elevated transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-primary-light hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+            className="inline-flex items-center justify-center gap-2 rounded-button bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-elevated transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-primary-dark hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light focus-visible:ring-offset-2 focus-visible:ring-offset-primary-dark"
           >
             Dowiedz się więcej
             <ArrowRight size={18} aria-hidden="true" />

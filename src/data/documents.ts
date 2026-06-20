@@ -57,3 +57,5 @@ export function getDocuments(): SiteDocument[] {
 export function getDocumentById(id: string): SiteDocument | undefined {
   return documents.find((d) => d.id === id)
 }
+
+// TODO dzialajace dokumenty w PDF do pobrania i podgladu w przegladarce

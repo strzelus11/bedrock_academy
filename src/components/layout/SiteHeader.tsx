@@ -2,8 +2,9 @@
 
 import { useState, useLayoutEffect, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, Leaf } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { navLinks } from '@/data/navigation'
 import { MobileNav } from './MobileNav'
 import { cn } from '@/lib/utils'
@@ -77,27 +78,20 @@ export function SiteHeader() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+            className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
             aria-label="Bedrock Academy — strona główna"
           >
-            <div
+            <Image
+              src="/bedrock-academy.png"
+              alt="Bedrock Academy"
+              height={44}
+              width={220}
+              priority
               className={cn(
-                'flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300',
-                overDarkHero
-                  ? 'bg-white/20 text-white border border-white/30 group-hover:bg-white/30'
-                  : 'bg-primary text-white group-hover:bg-primary-dark',
+                'h-11 w-auto object-contain transition-all duration-300',
+                overDarkHero ? 'drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)]' : '',
               )}
-            >
-              <Leaf size={20} aria-hidden="true" />
-            </div>
-            <span
-              className={cn(
-                'font-heading text-lg font-bold transition-colors duration-300',
-                overDarkHero ? 'text-white' : 'text-primary-dark',
-              )}
-            >
-              Bedrock Academy
-            </span>
+            />
           </Link>
 
           {/* Desktop nav */}

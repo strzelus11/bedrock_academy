@@ -44,10 +44,10 @@ export function PdfPreviewModal({ document, onClose }: PdfPreviewModalProps) {
     <AnimatePresence>
       {isOpen && document && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop — above site header (z-1000) */}
           <motion.div
             key="pdf-modal-backdrop"
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-1010 bg-black/60 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -56,13 +56,13 @@ export function PdfPreviewModal({ document, onClose }: PdfPreviewModalProps) {
             aria-hidden="true"
           />
 
-          {/* Modal */}
+          {/* Modal — above backdrop */}
           <motion.div
             key="pdf-modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby="pdf-modal-title"
-            className="fixed inset-4 z-50 flex flex-col overflow-hidden rounded-card bg-white shadow-elevated md:inset-8 lg:inset-12"
+            className="fixed inset-4 z-1020 flex flex-col overflow-hidden rounded-card bg-white shadow-elevated md:inset-8 lg:inset-12"
             initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}

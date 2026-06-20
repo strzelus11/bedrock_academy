@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { X } from 'lucide-react'
 import { navLinks } from '@/data/navigation'
@@ -63,9 +64,13 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-border px-6 py-5">
-              <span className="font-heading text-lg font-bold text-primary-dark">
-                Bedrock Academy
-              </span>
+              <Image
+                src="/bedrock-academy.png"
+                alt="Bedrock Academy"
+                height={40}
+                width={200}
+                className="h-10 w-auto object-contain"
+              />
               <button
                 onClick={onClose}
                 aria-label="Zamknij menu"

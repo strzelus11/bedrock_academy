@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { Leaf, Mail, Phone } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 import { company } from '@/data/company'
 import { navLinks } from '@/data/navigation'
 import { Container } from '@/components/ui/Container'
@@ -13,13 +14,14 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Col 1: Brand */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Leaf size={20} aria-hidden="true" />
-              </div>
-              <span className="font-heading text-lg font-bold">
-                {company.name}
-              </span>
+            <div className="flex items-center">
+              <Image
+                src="/bedrock-academy.png"
+                alt="Bedrock Academy"
+                height={44}
+                width={220}
+                className="h-11 w-auto object-contain"
+              />
             </div>
             <p className="text-sm leading-relaxed text-white/70">
               {company.description}
@@ -92,8 +94,8 @@ export function SiteFooter() {
             &copy; {currentYear} {company.fullName}. Wszelkie prawa zastrzeżone.
           </p>
           <p className="text-xs text-white/40">
-            Wykonanie:{' '}
-            <span className="text-white/60">Bedrock Academy</span>
+            Design i development:{' '}
+            <span className="text-white/60">Jakub Strzelecki</span>
           </p>
         </div>
       </Container>
