@@ -1,0 +1,501 @@
+# PROJEKT CRM DLA AKADEMII PROGRAMOWANIA DLA DZIECI — PAMIĘĆ PROJEKTU DLA CLAUDE / CODEX
+
+## Kontekst projektu
+
+Projekt dotyczy stworzenia dedykowanego systemu CRM dla firmy prowadzącej zajęcia z programowania dla dzieci odbywające się w różnych szkołach.
+
+System nie jest sklepem internetowym i nie powinien być projektowany jak e-commerce. Jest to dedykowany system operacyjny wspierający codzienną pracę właściciela firmy.
+
+Priorytety projektu:
+
+- maksymalne dopasowanie do rzeczywistego procesu biznesowego,
+- możliwość obsługi dużej liczby uczniów,
+- automatyzacja procesów administracyjnych,
+- minimalizacja ręcznej pracy,
+- łatwość rozwoju systemu w przyszłości.
+
+CRM będzie używany wyłącznie przez właściciela firmy. Rodzice oraz uczniowie nie mają dostępu do panelu administracyjnego.
+
+---
+
+# TECHNOLOGIE
+
+## CRM
+
+Backend:
+- Django
+- Django REST Framework
+- PostgreSQL
+
+Zadania cykliczne:
+- Celery
+- Celery Beat
+- Redis
+
+Płatności:
+- Przelewy24 REST API
+
+Wysyłka maili:
+- Resend (preferowane)
+lub
+- Amazon SES
+lub
+- SendGrid
+
+Frontend CRM:
+- Django Templates na MVP
+lub
+- Next.js jako oddzielny frontend w przyszłości.
+
+Architektura musi umożliwiać późniejszą migrację frontendu bez przebudowy backendu.
+
+---
+
+# GŁÓWNA HIERARCHIA DANYCH
+
+System opiera się na następującej strukturze:
+
+Rok szkolny
+↓
+Szkoła
+↓
+Dziecko
+↓
+Płatnik (rodzic)
+
+Każde dziecko:
+
+- należy do konkretnego roku szkolnego,
+- jest przypisane do szkoły,
+- posiada przypisanego płatnika,
+- posiada status aktywny lub nieaktywny.
+
+---
+
+# ZAKŁADKA I — ORGANIZACJA
+
+System musi umożliwiać:
+
+## Lata szkolne
+
+Przykład:
+
+- 2026/2027
+- 2027/2028
+
+Funkcje:
+
+- dodawanie roku szkolnego,
+- oznaczanie aktywnego roku,
+- przechowywanie historii.
+
+---
+
+## Szkoły
+
+Dla każdej szkoły przechowywać:
+
+- nazwę,
+- adres,
+- miasto,
+- status aktywna/nieaktywna.
+
+Dodatkowo kontakty:
+
+- dyrektor,
+- księgowość,
+- inne osoby kontaktowe.
+
+Kontakty powinny być ukryte pod przyciskiem lub rozwijanym panelem, aby interfejs pozostał przejrzysty.
+
+---
+
+## Dzieci
+
+Dla każdego dziecka:
+
+- imię,
+- nazwisko,
+- klasa,
+- data podpisania umowy,
+- data rozpoczęcia zajęć,
+- data zakończenia (opcjonalna),
+- notatki,
+- status aktywny/nieaktywny.
+
+Lista dzieci:
+
+- aktywne dzieci zawsze na górze,
+- nieaktywne poniżej,
+- nie usuwamy historii.
+
+---
+
+## Płatnicy
+
+Dane:
+
+- imię,
+- nazwisko,
+- email,
+- numer telefonu,
+- notatki.
+
+Jeden płatnik może mieć przypisanych wielu uczniów (rodzeństwo).
+
+---
+
+# ZASADY USUWANIA DANYCH
+
+Nie usuwać rekordów fizycznie.
+
+Stosować:
+
+soft delete / dezaktywację.
+
+Po dezaktywacji:
+
+- dziecko nie uczestniczy w płatnościach,
+- nie otrzymuje maili,
+- nie pojawia się w aktywnych raportach,
+- historia pozostaje.
+
+---
+
+# ZAKŁADKA II — PŁATNOŚCI
+
+Operator:
+
+Przelewy24.
+
+Nie korzystamy z automatycznych subskrypcji operatora.
+
+CRM sam zarządza miesięcznymi należnościami.
+
+---
+
+# MIESIĘCZNY CYKL PŁATNOŚCI
+
+Przykład:
+
+Termin płatności:
+
+10 dzień miesiąca.
+
+Cykl:
+
+1 dzień miesiąca:
+- utworzenie należności,
+- status Oczekuje,
+- wysłanie pierwszego maila.
+
+5 dzień:
+- drugie przypomnienie.
+
+9 dzień:
+- ostatnie przypomnienie.
+
+11 dzień:
+- status Nie opłacono.
+
+Jeżeli płatność nastąpi wcześniej:
+
+- dalsze maile nie są wysyłane.
+
+---
+
+# STATUSY PŁATNOŚCI
+
+waiting
+= oczekuje na płatność
+
+paid
+= opłacono
+
+overdue
+= nie opłacono po terminie
+
+cancelled
+= anulowano
+
+not_applicable
+= nie dotyczy
+
+---
+
+# LINKI DO PŁATNOŚCI
+
+Każda miesięczna należność posiada:
+
+- własny UUID,
+- własny link płatniczy.
+
+Wszystkie przypomnienia dotyczą tego samego rekordu należności.
+
+Po opłaceniu:
+
+- link przestaje umożliwiać wygenerowanie nowej płatności,
+- użytkownik otrzymuje informację, że należność została już opłacona.
+
+Ma to zapobiegać podwójnym płatnościom.
+
+---
+
+# PRZELEWY24 FLOW
+
+1.
+
+Rodzic otwiera link z maila.
+
+2.
+
+CRM sprawdza status należności.
+
+3.
+
+Jeżeli należność jest aktywna:
+
+CRM wywołuje:
+
+transaction/register
+
+4.
+
+Rodzic realizuje płatność w Przelewy24.
+
+5.
+
+Przelewy24 wysyła callback.
+
+6.
+
+CRM wykonuje:
+
+transaction/verify
+
+7.
+
+Po pozytywnej weryfikacji:
+
+- status zmienia się na paid,
+- zapisuje datę płatności,
+- zatrzymuje dalsze przypomnienia.
+
+Verify jest obowiązkowe.
+
+---
+
+# ZMIANY CEN
+
+System musi umożliwiać:
+
+## Globalna cena
+
+Cena standardowa dla wszystkich.
+
+Przykład:
+
+249 zł.
+
+---
+
+## Jednorazowa zmiana ceny
+
+Przykład:
+
+dziecko dołącza w połowie miesiąca.
+
+Tylko jeden miesiąc.
+
+---
+
+## Zakres dat
+
+Przykład:
+
+ferie zimowe.
+
+Obniżenie ceny dla wszystkich.
+
+---
+
+## Rabaty procentowe
+
+Przykład:
+
+10%.
+
+---
+
+## Stałe kwoty
+
+Przykład:
+
+50 zł zniżki.
+
+---
+
+# RODZEŃSTWO
+
+Jeden płatnik może mieć wiele dzieci.
+
+System musi obsługiwać:
+
+- grupy rodzeństwa,
+- zniżki,
+- oddzielne należności dla każdego dziecka.
+
+Nie tworzymy jednej wspólnej należności.
+
+Powody:
+
+- prostsze raportowanie,
+- łatwiejsza rezygnacja jednego dziecka,
+- prostsza historia płatności.
+
+---
+
+# ANULOWANIE UMOWY
+
+System musi pozwalać na:
+
+przyszłe zakończenie uczestnictwa.
+
+Przykład:
+
+Rodzic zgłasza rezygnację 5 maja.
+
+Umowa kończy się 30 czerwca.
+
+Do tego momentu:
+
+- dziecko pozostaje aktywne,
+- należności są generowane.
+
+Po tej dacie:
+
+- brak nowych należności,
+- brak przypomnień.
+
+---
+
+# MAILING
+
+Technologia:
+
+Celery + Resend.
+
+Wysyłka zawsze asynchroniczna.
+
+Nigdy w request/response.
+
+---
+
+# TYPY MAILI
+
+1.
+
+Pierwsze przypomnienie.
+
+2.
+
+Drugie przypomnienie.
+
+3.
+
+Ostatnie przypomnienie.
+
+4.
+
+Potwierdzenie płatności.
+
+---
+
+# LOGI MAILI
+
+Dla każdego maila przechowywać:
+
+- odbiorcę,
+- typ,
+- status,
+- datę wysłania,
+- błędy.
+
+---
+
+# RAPORTY
+
+Dashboard powinien prezentować:
+
+- liczbę aktywnych uczniów,
+- liczbę płatników,
+- kwotę oczekiwaną,
+- kwotę opłaconą,
+- zaległości,
+- liczbę oczekujących płatności.
+
+---
+
+# RAPORTY MIESIĘCZNE
+
+Powinny zawierać:
+
+- należności,
+- wpłaty,
+- zaległości,
+- procent opłaconych należności.
+
+---
+
+# RAPORTY ROCZNE
+
+Powinny zawierać:
+
+- sumę przychodów,
+- liczbę uczniów,
+- liczbę płatników,
+- analizę miesięczną.
+
+---
+
+# NAJWAŻNIEJSZE ZASADY ARCHITEKTONICZNE
+
+1.
+
+CRM nie jest sklepem internetowym.
+
+2.
+
+Nie używać WooCommerce jako rdzenia systemu.
+
+3.
+
+Nie usuwać danych historycznych.
+
+4.
+
+Każdy miesiąc = osobna należność.
+
+5.
+
+Każda płatność P24 musi przejść verify.
+
+6.
+
+Wszystkie maile muszą działać przez kolejkę.
+
+7.
+
+CRM musi obsługiwać setki uczniów bez problemów wydajnościowych.
+
+8.
+
+Interfejs ma być prosty i szybki dla jednej osoby zarządzającej.
+
+9.
+
+Priorytetem jest dopasowanie do procesu biznesowego, a nie minimalizacja ilości kodu.
+
+10.
+
+Architektura musi umożliwiać dalszy rozwój systemu przez wiele lat.

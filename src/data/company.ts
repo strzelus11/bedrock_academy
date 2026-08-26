@@ -1,10 +1,10 @@
 export const company = {
   name: 'Bedrock Academy',
-  fullName: 'Bedrock Academy Sp. z o.o.',
+  fullName: 'Bedrock Academy Marcin Witek',
   president: 'Marcin Witek',
-  email: 'biuro@bedrock-academy.pl',
-  phone: '+48 500 000 000',
-  nip: '000-000-00-00',
+  email: 'biuro@bedrockacademy.pl',
+  phone: '+48 511 585 087',
+  nip: '8522737494',
   description:
     'Prowadzimy zajęcia z programowania dla dzieci w szkołach podstawowych w Poznaniu i okolicach. Uczymy przez zabawę w środowisku Minecraft Education.',
   shortDescription:
