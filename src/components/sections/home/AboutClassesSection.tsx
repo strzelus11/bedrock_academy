@@ -70,9 +70,9 @@ export function AboutClassesSection() {
             </p>
             <ul className="flex flex-col gap-3 mt-6">
               {[
-                'Zajęcia prowadzone bezpośrednio w szkołach',
-                'Grupy max. 12 uczestników',
-                'Doświadczeni i certyfikowani nauczyciele',
+                'Zajęcia prowadzone na terenie szkoły',
+                'Grupy max. 13 uczestników',
+                'Doświadczeni prowadzący',
                 'Program dostosowany do poziomu uczniów',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-text-secondary">

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
-  'https://bedrock-academy.pl'
+  'https://bedrockacademy.pl'
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -9,27 +9,27 @@ import { GlassPanel } from '@/components/ui/GlassPanel'
 const goals = [
   {
     icon: Target,
-    title: 'Dostępność edukacji programistycznej',
+    title: 'Dobry start w programowaniu',
     description:
-      'Chcemy, aby każde dziecko w szkole podstawowej miało dostęp do wysokiej jakości zajęć z programowania, niezależnie od miejsca zamieszkania czy zasobności portfela rodziców.',
+      'Chcemy dać dzieciom możliwość poznania programowania w przystępnej formie, już od pierwszych lat szkoły.',
   },
   {
     icon: BookOpen,
     title: 'Nauka przez doświadczenie',
     description:
-      'Wierzymy, że najlepsza nauka odbywa się przez działanie. Minecraft Education pozwala dzieciom eksperymentować, popełniać błędy i wyciągać wnioski w bezpiecznym środowisku.',
+      'Dzieci uczą się poprzez działanie - eksperymentują, popełniają błędy i samodzielnie dochodzą do rozwiązania.',
   },
   {
     icon: Heart,
-    title: 'Pasja do technologii',
+    title: 'Ciekawość technologii',
     description:
-      'Naszym celem jest zaszczepienie w dzieciach autentycznej pasji do technologii i rozwiązywania problemów — pasji, która będzie im towarzyszyć przez całe życie.',
+      'Chcemy rozbudzać zainteresowanie technologią i pokazywać dzieciom, że mogą ją nie tylko wykorzystywać, ale także rozumieć.',
   },
   {
     icon: Star,
-    title: 'Przygotowanie do przyszłości',
+    title: 'Umiejętności na przyszłość',
     description:
-      'Umiejętności programistyczne i algorytmiczne myślenie to kompetencje kluczowe w XXI wieku. Przygotowujemy dzieci na wyzwania, które ich czekają.',
+      'Programowanie uczy sposobu myślenia, który przydaje się znacznie szerzej niż tylko podczas pracy z komputerem.',
   },
 ]
 
@@ -56,8 +56,8 @@ export function AboutGoalsSection() {
             Po co to robimy?
           </h2>
           <p className="mt-4 text-text-secondary max-w-xl mx-auto">
-            Tworzymy Bedrock Academy z konkretną misją — sprawiamy, by programowanie
-            było dostępne, zrozumiałe i fascynujące dla każdego dziecka.
+            Żeby dzieci zamieniały ciekawość w realne umiejętności i
+            przekonywały się, że nauka może naprawdę wciągać.
           </p>
         </motion.div>
 

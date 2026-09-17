@@ -56,7 +56,7 @@ export default function LocationsPage() {
             Gdzie jesteśmy?
           </h1>
           <p className="text-text-secondary max-w-xl leading-relaxed">
-            Prowadzimy zajęcia w szkołach podstawowych na terenie Poznania i
+            Prowadzimy zajęcia w szkołach podstawowych na terenie Szczecina i
             okolic. Kliknij na szkołę, aby zobaczyć szczegóły.
           </p>
         </Container>

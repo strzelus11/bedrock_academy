@@ -14,10 +14,10 @@ function getResend(): Resend {
 
 export async function sendContactEmail(data: ContactFormData): Promise<void> {
   const resend = getResend()
-  const to = process.env.CONTACT_EMAIL_TO ?? 'biuro@bedrock-academy.pl'
+  const to = process.env.CONTACT_EMAIL_TO ?? 'biuro@bedrockacademy.pl'
 
   await resend.emails.send({
-    from: 'Bedrock Academy <formularz@bedrock-academy.pl>',
+    from: 'Bedrock Academy <formularz@bedrockacademy.pl>',
     to,
     replyTo: data.email,
     subject: `Nowa wiadomość od ${data.name} — formularz kontaktowy`,
@@ -51,7 +51,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<void> {
           ${escapeHtml(data.message).replace(/\n/g, '<br>')}
         </div>
         <p style="color: #64748B; font-size: 12px; margin-top: 24px; border-top: 1px solid #E2E8F0; padding-top: 12px;">
-          Ta wiadomość została wysłana przez formularz kontaktowy na stronie bedrock-academy.pl.<br>
+          Ta wiadomość została wysłana przez formularz kontaktowy na stronie bedrockacademy.pl.<br>
           Użytkownik wyraził zgodę na przetwarzanie danych osobowych (RODO).
         </p>
       </div>

@@ -6,11 +6,11 @@ import { Container } from '@/components/ui/Container'
 export const metadata: Metadata = {
   title: 'Dokumenty',
   description:
-    'Regulaminy, umowy, zgody RODO, program zajęć i cennik Bedrock Academy — wszystkie dokumenty do pobrania.',
+    'Umowa o świadczenie usług edukacyjnych oraz Standardy Ochrony Małoletnich Bedrock Academy — wszystkie dokumenty do pobrania.',
   openGraph: {
     title: 'Dokumenty | Bedrock Academy',
     description:
-      'Wszystkie dokumenty Bedrock Academy — regulaminy, umowy, zgody RODO i cennik.',
+      'Wszystkie dokumenty Bedrock Academy — umowa z klauzulą RODO i Standardy Ochrony Małoletnich.',
     url: '/dokumenty',
   },
 }

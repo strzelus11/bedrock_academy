@@ -1,52 +1,33 @@
-// Dokumenty — pliki PDF należy umieścić w katalogu /public/documents/
-// Zamień fileUrl na właściwe ścieżki po dodaniu plików
+// Dokumenty — pliki PDF znajdują się w katalogu /public/documents/
 import type { SiteDocument } from '@/types/document'
 
 export const documents: SiteDocument[] = [
   {
-    id: 'regulamin',
-    title: 'Regulamin zajęć',
-    description:
-      'Zasady uczestnictwa w zajęciach, prawa i obowiązki uczestników oraz rodziców.',
-    fileUrl: '/documents/placeholder.pdf',
-    category: 'Regulaminy',
-    updatedAt: '2024-09-01',
-  },
-  {
-    id: 'rodo',
-    title: 'Zgoda RODO',
-    description:
-      'Zgoda na przetwarzanie danych osobowych dziecka w celach związanych z uczestnictwem w zajęciach.',
-    fileUrl: '/documents/placeholder.pdf',
-    category: 'Prawne',
-    updatedAt: '2024-09-01',
-  },
-  {
     id: 'umowa',
-    title: 'Umowa z rodzicami',
+    title: 'Umowa o świadczenie usług edukacyjnych',
     description:
-      'Umowa określająca warunki współpracy między Bedrock Academy a rodzicami / opiekunami dziecka.',
-    fileUrl: '/documents/placeholder.pdf',
+      'Umowa określająca warunki zajęć z programowania z wykorzystaniem Minecraft Education, w tym zgodę i klauzulę informacyjną RODO.',
+    fileUrl: '/documents/umowa-o-swiadczenie-uslug-edukacyjnych.pdf',
     category: 'Prawne',
-    updatedAt: '2024-09-01',
+    updatedAt: '2026-09-15',
   },
   {
-    id: 'program',
-    title: 'Program zajęć',
+    id: 'som-pelna',
+    title: 'Standardy Ochrony Małoletnich',
     description:
-      'Szczegółowy program nauczania z podziałem na semestry i poziomy zaawansowania.',
-    fileUrl: '/documents/placeholder.pdf',
-    category: 'Edukacja',
-    updatedAt: '2024-09-01',
+      'Pełna wersja Standardów Ochrony Małoletnich w Bedrock Academy — zasady bezpiecznych relacji, procedury interwencyjne oraz zasady ochrony danych i wizerunku dzieci.',
+    fileUrl: '/documents/standardy-ochrony-maloletnich.pdf',
+    category: 'Bezpieczeństwo',
+    updatedAt: '2026-09-15',
   },
   {
-    id: 'cennik',
-    title: 'Cennik 2024/2025',
+    id: 'som-dzieci',
+    title: 'Standardy Ochrony Małoletnich — wersja dla dzieci',
     description:
-      'Aktualne ceny zajęć indywidualnych i grupowych na rok szkolny 2024/2025.',
-    fileUrl: '/documents/placeholder.pdf',
-    category: 'Cennik',
-    updatedAt: '2024-09-01',
+      'Wersja skrócona Standardów Ochrony Małoletnich, napisana prostym językiem dla najmłodszych uczestników zajęć.',
+    fileUrl: '/documents/standardy-ochrony-maloletnich-dla-dzieci.pdf',
+    category: 'Bezpieczeństwo',
+    updatedAt: '2026-09-15',
   },
 ]
 
@@ -57,5 +38,3 @@ export function getDocuments(): SiteDocument[] {
 export function getDocumentById(id: string): SiteDocument | undefined {
   return documents.find((d) => d.id === id)
 }
-
-// TODO dzialajace dokumenty w PDF do pobrania i podgladu w przegladarce

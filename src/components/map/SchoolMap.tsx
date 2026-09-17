@@ -77,7 +77,7 @@ export function SchoolMap({ schools, selectedId, onSchoolSelect }: SchoolMapProp
   return (
     <div className="relative h-full w-full rounded-card overflow-hidden shadow-card">
       <MapContainer
-        center={[52.4064, 16.9252]}
+        center={[53.4285, 14.5528]}
         zoom={11}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom

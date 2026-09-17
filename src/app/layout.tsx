@@ -21,14 +21,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bedrock-academy.pl',
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bedrockacademy.pl',
   ),
   title: {
     template: '%s | Bedrock Academy',
     default: 'Bedrock Academy — Programowanie dla dzieci',
   },
   description:
-    'Prowadzimy zajęcia z programowania dla dzieci w szkołach podstawowych w Poznaniu i okolicach. Uczymy przez zabawę w środowisku Minecraft Education.',
+    'Prowadzimy zajęcia z programowania dla dzieci w szkołach podstawowych w Szczecinie i okolicach. Uczymy przez zabawę w środowisku Minecraft Education.',
   openGraph: {
     type: 'website',
     locale: 'pl_PL',

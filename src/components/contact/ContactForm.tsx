@@ -292,8 +292,8 @@ export function ContactForm() {
             className="text-xs text-text-secondary leading-relaxed cursor-pointer"
           >
             Wyrażam zgodę na przetwarzanie moich danych osobowych przez Bedrock
-            Academy Sp. z o.o. w celu odpowiedzi na przesłaną wiadomość, zgodnie
-            z{' '}
+            Academy Marcin Witek w celu odpowiedzi na przesłaną wiadomość,
+            zgodnie z{' '}
             <Link
               href="/polityka-prywatnosci"
               className="text-primary underline underline-offset-2 hover:text-primary-dark"

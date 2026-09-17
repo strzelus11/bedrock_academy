@@ -96,7 +96,7 @@ export function HeroSection() {
           <motion.div variants={fadeUp} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/30 px-4 py-1.5 text-sm font-semibold text-primary-light backdrop-blur-sm border border-primary-light/40 shadow-[inset_0_1px_0_rgba(184,216,168,0.15)] mb-5">
               <span className="h-2 w-2 rounded-full bg-primary-light animate-pulse" aria-hidden="true" />
-              Poznań i okolice
+              Szczecin i okolice
             </span>
           </motion.div>
 

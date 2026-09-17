@@ -9,37 +9,37 @@ const benefits = [
     number: '01',
     title: 'Rozwijają myślenie algorytmiczne',
     description:
-      'Dzieci uczą się rozkładać skomplikowane problemy na mniejsze kroki — umiejętność przydatna nie tylko w programowaniu, ale też w matematyce i codziennym życiu.',
+      'Dzieci uczą się dzielić większe problemy na mniejsze etapy, analizować kolejne kroki i szukać rozwiązań, które prowadzą do zamierzonego efektu.',
   },
   {
     number: '02',
-    title: 'Zwiększają pewność siebie',
+    title: 'Budują pewność siebie',
     description:
-      'Każdy działający projekt to powód do dumy. Dzieci widzą namacalne efekty swojej pracy, co buduje poczucie sprawczości i motywuje do dalszej nauki.',
+      'Każde poprawnie wykonane zadanie daje dziecku poczucie sprawczości, pokazuje mu efekty własnej pracy i zachęca do podejmowania kolejnych wyzwań.',
   },
   {
     number: '03',
-    title: 'Uczą się współpracy',
+    title: 'Uczą się samodzielności',
     description:
-      'Praca w parach i małych grupach uczy dzieci komunikacji, dzielenia zadań i wspólnego rozwiązywania problemów — kompetencji niezbędnych w przyszłej karierze.',
+      'Dzieci próbują różnych sposobów, sprawdzają swoje pomysły i poprawiają błędy, ucząc się samodzielnie dochodzić do rozwiązania.',
   },
   {
     number: '04',
-    title: 'Poznają bezpieczny internet',
+    title: 'Oswajają się z technologią',
     description:
-      'Przy okazji nauki programowania rozmawiamy o bezpieczeństwie w sieci, prywatności danych i odpowiedzialnym korzystaniu z technologii.',
+      'Regularna praca przy komputerze pomaga dzieciom coraz swobodniej korzystać z cyfrowych narzędzi i lepiej odnajdywać się w środowisku komputerowym.',
   },
   {
     number: '05',
-    title: 'Mają świetną zabawę',
+    title: 'Uczą się przez zabawę',
     description:
-      'Przede wszystkim — dzieci się bawią! Minecraft Education to radość z tworzenia, eksploracji i odkrywania. Nauka musi być przyjemnością.',
+      'Minecraft Education pozwala poznawać programowanie w znanym dzieciom środowisku, dzięki czemu wykonywanie kolejnych zadań staje się bardziej angażujące.',
   },
   {
     number: '06',
     title: 'Rozwijają kreatywność',
     description:
-      'Nieograniczone możliwości Minecraft Education zachęcają do eksperymentowania i tworzenia własnych rozwiązań, rozwijając twórcze myślenie.',
+      'Dzieci eksperymentują z różnymi rozwiązaniami, sprawdzają własne pomysły i obserwują, jak ich decyzje wpływają na świat Minecrafta.',
   },
 ]
 
