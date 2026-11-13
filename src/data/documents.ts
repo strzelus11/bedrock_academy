@@ -9,7 +9,7 @@ export const documents: SiteDocument[] = [
       'Umowa określająca warunki zajęć z programowania z wykorzystaniem Minecraft Education, w tym zgodę i klauzulę informacyjną RODO.',
     fileUrl: '/documents/umowa-o-swiadczenie-uslug-edukacyjnych.pdf',
     category: 'Prawne',
-    updatedAt: '2026-09-15',
+    updatedAt: '2026-11-13',
   },
   {
     id: 'som-pelna',
