@@ -18,7 +18,7 @@ export const documents: SiteDocument[] = [
       'Pełna wersja Standardów Ochrony Małoletnich w Bedrock Academy — zasady bezpiecznych relacji, procedury interwencyjne oraz zasady ochrony danych i wizerunku dzieci.',
     fileUrl: '/documents/standardy-ochrony-maloletnich.pdf',
     category: 'Bezpieczeństwo',
-    updatedAt: '2026-09-15',
+    updatedAt: '2026-11-25',
   },
   {
     id: 'som-dzieci',
@@ -27,7 +27,7 @@ export const documents: SiteDocument[] = [
       'Wersja skrócona Standardów Ochrony Małoletnich, napisana prostym językiem dla najmłodszych uczestników zajęć.',
     fileUrl: '/documents/standardy-ochrony-maloletnich-dla-dzieci.pdf',
     category: 'Bezpieczeństwo',
-    updatedAt: '2026-09-15',
+    updatedAt: '2026-11-25',
   },
 ]
 
